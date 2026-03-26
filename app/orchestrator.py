@@ -1,108 +1,84 @@
 from groq import Groq
+from openai import OpenAI
 import os
 import json
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-
-
-def call_ai(prompt):
-    response = client.chat.completions.create(
-        model="mixtral-8x7b-32768",
-        messages=[
-            {"role": "system", "content": "You are an expert code reviewer."},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.2,
-        max_tokens=1000
-    )
-
-    output = response.choices[0].message.content.strip()
-
-    try:
-        if output.startswith("```"):
-            output = output.split("```")[1]
-
-        return json.loads(output)
-    except:
-        return [{
-            "type": "AI",
-            "severity": "Low",
-            "message": output,
-            "line": None
-        }]
-
-
-# 🔥 MULTI AGENTS
-
-def security_agent(code):
-    prompt = f"""
-Find security vulnerabilities in this code.
-
-Return JSON only.
-
-CODE:
-{code}
-"""
-    return call_ai(prompt)
-
-
-def performance_agent(code):
-    prompt = f"""
-Find performance issues in this code.
-
-Return JSON only.
-
-CODE:
-{code}
-"""
-    return call_ai(prompt)
-
-
-def style_agent(code):
-    prompt = f"""
-Find code quality and style issues.
-
-Return JSON only.
-
-CODE:
-{code}
-"""
-    return call_ai(prompt)
-
-
-# 🔥 ORCHESTRATOR
+groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def run_agents(code):
+    prompt = f"""
+Analyze the following code and find:
+- Bugs
+- Security issues
+- Bad practices
+
+Return ONLY JSON:
+[
+  {{
+    "type": "Bug | Security | Performance | Style",
+    "severity": "High | Medium | Low",
+    "message": "Explain issue",
+    "line": "line number or null"
+  }}
+]
+
+CODE:
+{code}
+"""
+
+    # 🔥 GROQ (FREE WORKING)
     try:
-        results = []
+        response = groq_client.chat.completions.create(
+            model="llama-3.1-8b-instant",   # ✅ FIXED
+            messages=[
+                {"role": "system", "content": "Expert code reviewer"},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        output = response.choices[0].message.content.strip()
 
-        results += security_agent(code)
-        results += performance_agent(code)
-        results += style_agent(code)
+        try:
+            return json.loads(output)
+        except:
+            return [{
+                "type": "AI",
+                "severity": "Low",
+                "message": output,
+                "line": None
+            }]
 
-        # 🔥 REMOVE DUPLICATES
-        unique = []
-        seen = set()
+    except Exception as e:
+        print("Groq failed:", e)
 
-        for r in results:
-            key = (r.get("type"), r.get("message"))
-            if key not in seen:
-                seen.add(key)
-                unique.append(r)
+    # 🔥 OPENAI (fallback)
+    try:
+        response = openai_client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "Expert code reviewer"},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        output = response.choices[0].message.content.strip()
 
-        # 🔥 SORT BY SEVERITY
-        priority = {"High": 3, "Medium": 2, "Low": 1}
-        unique.sort(key=lambda x: priority.get(x.get("severity"), 0), reverse=True)
-
-        return unique
+        try:
+            return json.loads(output)
+        except:
+            return [{
+                "type": "AI",
+                "severity": "Low",
+                "message": output,
+                "line": None
+            }]
 
     except Exception as e:
         return [{
             "type": "System",
             "severity": "High",
-            "message": str(e),
+            "message": f"All AI providers failed: {str(e)}",
             "line": None
         }]
