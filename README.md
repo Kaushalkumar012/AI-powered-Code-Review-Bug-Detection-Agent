@@ -138,3 +138,13 @@ GROQ_API_KEY=<your_groq_api_key>
 ## 📄 License
 
 MIT License — feel free to use, modify, and distribute.
+
+---
+
+## 📝 Changelog
+
+### Latest Update
+- Replaced `openai` dependency with `groq` in `requirements.txt`
+- Centralized all environment variables in `config.py` (single source of truth)
+- Removed debug `print` statement that was leaking `GITHUB_TOKEN` to logs
+- `orchestrator.py` now imports `GROQ_API_KEY` from `config.py` instead of loading `.env` independently
