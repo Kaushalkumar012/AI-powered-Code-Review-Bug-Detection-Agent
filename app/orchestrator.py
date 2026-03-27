@@ -53,7 +53,7 @@ CODE:
         except Exception as e:
             return [{"type": self.name, "severity": "Low", "message": str(e), "line": None, "suggested_fix": None}]
 
-    def run(self, state: ReviewState) -> dict:
+    def __call__(self, state: ReviewState) -> dict:
         raise NotImplementedError
 
 
@@ -63,40 +63,36 @@ class SecurityAgent(BaseAgent):
     def __init__(self):
         super().__init__("Security Agent", "security vulnerabilities, hardcoded secrets, SQL injection, XSS")
 
-    def run(self, state: ReviewState) -> dict:
-        findings = self._call_llm(state["code"])
-        return {"security_findings": findings}
+    def __call__(self, state: ReviewState) -> dict:
+        return {"security_findings": self._call_llm(state["code"])}
 
 
 class PerformanceAgent(BaseAgent):
     def __init__(self):
         super().__init__("Performance Agent", "performance bottlenecks, nested loops, N+1 queries, inefficient operations")
 
-    def run(self, state: ReviewState) -> dict:
-        findings = self._call_llm(state["code"])
-        return {"performance_findings": findings}
+    def __call__(self, state: ReviewState) -> dict:
+        return {"performance_findings": self._call_llm(state["code"])}
 
 
 class StyleAgent(BaseAgent):
     def __init__(self):
         super().__init__("Style Agent", "code quality issues, debug prints, poor naming conventions, dead code")
 
-    def run(self, state: ReviewState) -> dict:
-        findings = self._call_llm(state["code"])
-        return {"style_findings": findings}
+    def __call__(self, state: ReviewState) -> dict:
+        return {"style_findings": self._call_llm(state["code"])}
 
 
 # ── Orchestrator Agent ─────────────────────────────────────────────────────────
 
 class OrchestratorAgent:
-    def run(self, state: ReviewState) -> dict:
+    def __call__(self, state: ReviewState) -> dict:
         all_findings = (
             state.get("security_findings", []) +
             state.get("performance_findings", []) +
             state.get("style_findings", [])
         )
 
-        # deduplicate
         seen, unique = set(), []
         for r in all_findings:
             key = (r.get("type"), r.get("message"))
@@ -104,7 +100,6 @@ class OrchestratorAgent:
                 seen.add(key)
                 unique.append(r)
 
-        # sort by severity
         priority = {"High": 3, "Medium": 2, "Low": 1}
         unique.sort(key=lambda x: priority.get(x.get("severity"), 0), reverse=True)
 
@@ -113,35 +108,42 @@ class OrchestratorAgent:
 
 # ── LangGraph Pipeline ─────────────────────────────────────────────────────────
 
-security_agent = SecurityAgent()
-performance_agent = PerformanceAgent()
-style_agent = StyleAgent()
-orchestrator_agent = OrchestratorAgent()
+class CodeReviewGraph:
+    def __init__(self):
+        self.security_agent = SecurityAgent()
+        self.performance_agent = PerformanceAgent()
+        self.style_agent = StyleAgent()
+        self.orchestrator_agent = OrchestratorAgent()
 
-graph = StateGraph(ReviewState)
+        graph = StateGraph(ReviewState)
 
-graph.add_node("security", security_agent.run)
-graph.add_node("performance", performance_agent.run)
-graph.add_node("style", style_agent.run)
-graph.add_node("orchestrator", orchestrator_agent.run)
+        graph.add_node("security", self.security_agent)
+        graph.add_node("performance", self.performance_agent)
+        graph.add_node("style", self.style_agent)
+        graph.add_node("orchestrator", self.orchestrator_agent)
 
-graph.set_entry_point("security")
-graph.add_edge("security", "performance")
-graph.add_edge("performance", "style")
-graph.add_edge("style", "orchestrator")
-graph.add_edge("orchestrator", END)
+        graph.set_entry_point("security")
+        graph.add_edge("security", "performance")
+        graph.add_edge("performance", "style")
+        graph.add_edge("style", "orchestrator")
+        graph.add_edge("orchestrator", END)
 
-pipeline = graph.compile()
+        self.pipeline = graph.compile()
+
+    def run(self, code: str) -> list:
+        result = self.pipeline.invoke({
+            "code": code,
+            "security_findings": [],
+            "performance_findings": [],
+            "style_findings": [],
+            "final_findings": []
+        })
+        return result["final_findings"]
 
 
 # ── Entry Point ────────────────────────────────────────────────────────────────
 
+review_graph = CodeReviewGraph()
+
 def run_agents(code: str) -> list:
-    result = pipeline.invoke({
-        "code": code,
-        "security_findings": [],
-        "performance_findings": [],
-        "style_findings": [],
-        "final_findings": []
-    })
-    return result["final_findings"]
+    return review_graph.run(code)
