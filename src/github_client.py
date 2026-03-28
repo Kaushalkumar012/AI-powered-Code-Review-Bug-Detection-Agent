@@ -52,7 +52,7 @@ def fetch_pr_data(repo_full_name: str, pr_number: int) -> tuple[str, dict[str, s
     pr = repo.get_pull(pr_number)
 
     # PyGithub doesn't expose the raw diff directly — fetch via REST
-    with httpx.Client(timeout=30) as client:
+    with httpx.Client(timeout=30, follow_redirects=True) as client:
         resp = client.get(
             pr.diff_url,
             headers={"Authorization": f"token {GITHUB_TOKEN}"},
