@@ -410,7 +410,7 @@ ngrok http 8000                    # terminal 2
 
 <br/><br/>
 
-**Made with ❤️ by [r4hul-s3thi](https://github.com/r4hul-s3thi)**
+**Made with ❤️ by [RunTimeError](https://github.com/r4hul-s3thi)**
 
 <br/>
 
