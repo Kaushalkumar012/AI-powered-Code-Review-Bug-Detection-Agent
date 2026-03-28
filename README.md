@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=800&size=26&duration=2500&pause=600&color=00D9FF&center=true&vCenter=true&repeat=true&width=800&height=60&lines=🤖+AI-Powered+Code+Review+%26+Bug+Detection;🔐+OWASP+Top-10+Security+Analysis;⚡+N%2B1+Query+%26+Performance+Detection;🎨+PEP+8+%26+Style+Enforcement;🌳+95%25+Token+Reduction+via+Tree-sitter+AST;🚀+Production-Ready+%7C+35+Tests+Passing" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=800&size=24&duration=2500&pause=600&color=00D9FF&center=true&vCenter=true&repeat=true&width=800&height=60&lines=AI-Powered+Code+Review+%26+Bug+Detection;OWASP+Top-10+Security+Analysis;N%2B1+Query+%26+Performance+Detection;PEP+8+%26+Style+Enforcement;95%25+Token+Reduction+via+Tree-sitter+AST;Production-Ready+%7C+Docker+%7C+35+Tests+Passing" alt="Typing SVG" />
 
 <br/>
 
@@ -10,8 +10,12 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi&logoColor=white&labelColor=0d1117)](https://fastapi.tiangolo.com)
 [![LangGraph](https://img.shields.io/badge/LangGraph-1.1.3-FF6B6B?style=for-the-badge&logo=chainlink&logoColor=white&labelColor=0d1117)](https://langchain-ai.github.io/langgraph/)
 [![OpenAI](https://img.shields.io/badge/GPT--4o--mini-412991?style=for-the-badge&logo=openai&logoColor=white&labelColor=0d1117)](https://openai.com)
+
+<br/>
+
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white&labelColor=0d1117)](https://docker.com)
 [![Tests](https://img.shields.io/badge/Tests-35%20Passing-00C853?style=for-the-badge&logo=pytest&logoColor=white&labelColor=0d1117)](https://pytest.org)
+[![Coverage](https://img.shields.io/badge/Token%20Reduction-95%25-00C853?style=for-the-badge&logo=codecov&logoColor=white&labelColor=0d1117)](#)
 [![License](https://img.shields.io/badge/License-MIT-F7DF1E?style=for-the-badge&logo=opensourceinitiative&logoColor=black&labelColor=0d1117)](LICENSE)
 
 <br/>
@@ -20,7 +24,7 @@
 
 <br/>
 
-**[🚀 Quick Start](#-quick-start)** &nbsp;•&nbsp; **[🏗️ Architecture](#️-architecture)** &nbsp;•&nbsp; **[⚙️ Installation](#️-installation)** &nbsp;•&nbsp; **[🐳 Docker](#-docker)** &nbsp;•&nbsp; **[🧪 Tests](#-running-tests)** &nbsp;•&nbsp; **[📡 API](#-api-endpoints)**
+**[Quick Start](#-quick-start)** &nbsp;•&nbsp; **[Architecture](#-architecture)** &nbsp;•&nbsp; **[Installation](#-installation)** &nbsp;•&nbsp; **[Docker](#-docker)** &nbsp;•&nbsp; **[Tests](#-running-tests)** &nbsp;•&nbsp; **[API](#-api-endpoints)**
 
 </div>
 
@@ -28,42 +32,42 @@
 
 ## ✨ Features
 
-<div align="center">
-
 <table>
 <tr>
 <td align="center" width="25%">
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=2000&pause=5000&color=FF4444&center=true&vCenter=true&width=200&height=25&lines=🔐+Security+Analysis" alt="" />
+
+**🔐 Security Analysis**
 
 SQL/NoSQL Injection · Hardcoded Secrets · Command Injection · Insecure Deserialization · Path Traversal · **OWASP Top-10**
+
 </td>
 <td align="center" width="25%">
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=2000&pause=5000&color=FF9900&center=true&vCenter=true&width=200&height=25&lines=⚡+Performance+Analysis" alt="" />
+
+**⚡ Performance Analysis**
 
 N+1 Queries · O(n²) Loops · Blocking I/O · Missing Bulk Ops · Repeated Calls · **Caching Hints**
+
 </td>
 <td align="center" width="25%">
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=2000&pause=5000&color=00D9FF&center=true&vCenter=true&width=200&height=25&lines=🎨+Style+Analysis" alt="" />
+
+**🎨 Style Analysis**
 
 PEP 8 · Missing Docstrings · Type Hints · Magic Numbers · Unclear Names · **Import Order**
+
 </td>
 <td align="center" width="25%">
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=2000&pause=5000&color=7B2FBE&center=true&vCenter=true&width=200&height=25&lines=🧠+Smart+Pipeline" alt="" />
+
+**🧠 Smart Pipeline**
 
 **~95% Token Reduction** · Parallel Agents · Dedup + Sort · Rate Limiting · Batched Comments
+
 </td>
 </tr>
 </table>
 
-</div>
-
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:7b2fbe,100:00d9ff&height=3&section=header" width="100%"/>
 
 ## 🏗️ Architecture
-
-<div align="center">
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&duration=3000&pause=2000&color=00D9FF&center=true&vCenter=true&width=600&height=30&lines=GitHub+PR+→+FastAPI+→+AST+Chunker+→+LangGraph+→+PR+Comments" alt="flow" />
-</div>
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
@@ -104,7 +108,7 @@ PEP 8 · Missing Docstrings · Type Hints · Magic Numbers · Unclear Names · *
          │               ┌──────────▼──────────┐
          │               │    Synthesizer       │
          │               │  Dedup + Sort        │
-         │               │  High→Medium→Low     │
+         │               │  High → Medium → Low │
          │               └──────────┬──────────┘
          └──────────────────────────┼──────────────┘
                                     │
@@ -156,25 +160,25 @@ PEP 8 · Missing Docstrings · Type Hints · Magic Numbers · Unclear Names · *
 AI-powered-Code-Review-Bug-Detection-Agent/
 │
 ├── 📁 src/                        ← Application source code
-│   ├── 🚀 main.py                 FastAPI entrypoint + webhook handler
-│   ├── 🤖 agents.py               LangGraph state machine + agent nodes
-│   ├── 🌳 parser.py               Tree-sitter AST semantic chunker
-│   ├── 🐙 github_client.py        GitHub API: fetch PR data, post comments
-│   └── ⚙️  config.py               Env-var loading via python-dotenv
+│   ├── main.py                    FastAPI entrypoint + webhook handler
+│   ├── agents.py                  LangGraph state machine + agent nodes
+│   ├── parser.py                  Tree-sitter AST semantic chunker
+│   ├── github_client.py           GitHub API: fetch PR data, post comments
+│   └── config.py                  Env-var loading via python-dotenv
 │
 ├── 📁 tests/                      ← All test files
-│   ├── 🧪 test_parser.py          Diff parsing, AST, token reduction
-│   ├── 🧪 test_agents.py          LLM mocking, agents, synthesizer
-│   └── 🧪 test_webhook.py         FastAPI endpoint integration tests
+│   ├── test_parser.py             Diff parsing, AST, token reduction
+│   ├── test_agents.py             LLM mocking, agents, synthesizer
+│   └── test_webhook.py            FastAPI endpoint integration tests
 │
 ├── 📁 docker/                     ← Container configuration
-│   ├── 🐳 Dockerfile
-│   └── 🐳 docker-compose.yml
+│   ├── Dockerfile
+│   └── docker-compose.yml
 │
-├── 📦 requirements.txt
-├── 🔧 pytest.ini
-├── 🔑 .env.example
-└── 🚫 .gitignore
+├── requirements.txt
+├── pytest.ini
+├── .env.example
+└── .gitignore
 ```
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:00d9ff,100:7b2fbe&height=3&section=header" width="100%"/>
@@ -185,10 +189,10 @@ AI-powered-Code-Review-Bug-Detection-Agent/
 
 | Tool | Version | Download |
 |:---|:---:|:---:|
-| 🐍 Python | 3.11+ | [python.org](https://python.org/downloads) |
-| 🔧 Git | Any | [git-scm.com](https://git-scm.com/downloads) |
-| 🌐 ngrok *(dev only)* | Any | [ngrok.com/download](https://ngrok.com/download) |
-| 🐳 Docker *(optional)* | Any | [docker.com](https://docker.com/get-started) |
+| Python | 3.11+ | [python.org](https://python.org/downloads) |
+| Git | Any | [git-scm.com](https://git-scm.com/downloads) |
+| ngrok *(dev only)* | Any | [ngrok.com/download](https://ngrok.com/download) |
+| Docker *(optional)* | Any | [docker.com](https://docker.com/get-started) |
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:7b2fbe,100:00d9ff&height=3&section=header" width="100%"/>
 
@@ -204,11 +208,11 @@ cd AI-powered-Code-Review-Bug-Detection-Agent
 ### Step 2 — Create a virtual environment
 
 ```bash
-# 🪟 Windows
+# Windows
 python -m venv venv
 venv\Scripts\activate
 
-# 🍎 macOS / 🐧 Linux
+# macOS / Linux
 python3 -m venv venv
 source venv/bin/activate
 ```
@@ -222,10 +226,10 @@ pip install -r requirements.txt
 ### Step 4 — Configure environment variables
 
 ```bash
-# 🪟 Windows
+# Windows
 copy .env.example .env
 
-# 🍎 macOS / 🐧 Linux
+# macOS / Linux
 cp .env.example .env
 ```
 
@@ -238,8 +242,9 @@ OPENAI_API_KEY=sk-your_openai_key_here
 LLM_MODEL=gpt-4o-mini
 ```
 
-> 🔑 GitHub Token → [github.com/settings/tokens](https://github.com/settings/tokens) → Classic → `repo` scope
-> 🔑 OpenAI Key → [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+> **Get your keys:**
+> - GitHub Token → [github.com/settings/tokens](https://github.com/settings/tokens) → Classic → `repo` scope
+> - OpenAI Key → [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
 
 ### Step 5 — Run the server
 
@@ -263,9 +268,9 @@ ngrok http 8000
 | Payload URL | `https://abc123.ngrok-free.app/webhook` |
 | Content type | `application/json` |
 | Secret | value of `GITHUB_WEBHOOK_SECRET` |
-| Events | ✅ Pull requests only |
+| Events | Pull requests only |
 
-### Step 8 — Open a PR and watch it work! 🎉
+### Step 8 — Open a PR and watch it work!
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:00d9ff,100:7b2fbe&height=3&section=header" width="100%"/>
 
@@ -343,14 +348,14 @@ tests/test_webhook.py::test_webhook_processes_opened_pr        PASSED
 ## 🔍 Sample PR Comments
 
 ```
-🔴 [High]   SQL injection via f-string interpolation
-            Fix: db.execute('SELECT * FROM users WHERE name=?', (user,))
+[High]   SQL injection via f-string interpolation
+         Fix: db.execute('SELECT * FROM users WHERE name=?', (user,))
 
-🟡 [Medium] N+1 query pattern — DB call inside a for-loop
-            Fix: users = User.objects.filter(id__in=user_ids)
+[Medium] N+1 query pattern — DB call inside a for-loop
+         Fix: users = User.objects.filter(id__in=user_ids)
 
-🟢 [Low]    Missing docstring on public function process_payment
-            Fix: Add a docstring describing parameters and return value.
+[Low]    Missing docstring on public function process_payment
+         Fix: Add a docstring describing parameters and return value.
 ```
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:00d9ff,100:7b2fbe&height=3&section=header" width="100%"/>
@@ -369,7 +374,7 @@ tests/test_webhook.py::test_webhook_processes_opened_pr        PASSED
 ## 🔧 Troubleshooting
 
 <details>
-<summary><b>❌ tree-sitter import error</b></summary>
+<summary><b>tree-sitter import error</b></summary>
 
 ```bash
 pip install tree-sitter==0.25.2 tree-sitter-python==0.23.6
@@ -377,19 +382,19 @@ pip install tree-sitter==0.25.2 tree-sitter-python==0.23.6
 </details>
 
 <details>
-<summary><b>❌ OpenAI AuthenticationError</b></summary>
+<summary><b>OpenAI AuthenticationError</b></summary>
 
 Check that `OPENAI_API_KEY` is set correctly in your `.env` file in the project root.
 </details>
 
 <details>
-<summary><b>❌ Webhook shows "Invalid signature"</b></summary>
+<summary><b>Webhook shows Invalid signature</b></summary>
 
 `GITHUB_WEBHOOK_SECRET` in `.env` must exactly match the secret entered in GitHub webhook settings.
 </details>
 
 <details>
-<summary><b>❌ ngrok tunnel not working</b></summary>
+<summary><b>ngrok tunnel not working</b></summary>
 
 ```bash
 uvicorn src.main:app --port 8000   # terminal 1
@@ -401,7 +406,7 @@ ngrok http 8000                    # terminal 2
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=15&duration=3000&pause=1500&color=00D9FF&center=true&vCenter=true&width=500&height=35&lines=⭐+Star+this+repo+if+it+helped+you!;🤖+Built+with+LangGraph+%2B+Tree-sitter+%2B+FastAPI;🔐+Keeping+your+PRs+secure+%26+clean" alt="footer" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=15&duration=3000&pause=1500&color=00D9FF&center=true&vCenter=true&width=500&height=35&lines=Star+this+repo+if+it+helped+you!;Built+with+LangGraph+%2B+Tree-sitter+%2B+FastAPI;Keeping+your+PRs+secure+%26+clean" alt="footer" />
 
 <br/><br/>
 
