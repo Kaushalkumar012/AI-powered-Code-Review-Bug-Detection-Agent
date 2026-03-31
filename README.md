@@ -559,7 +559,7 @@ pip install tree-sitter==0.25.2 tree-sitter-python==0.23.6
 
 <br/><br/>
 
-**Made with ❤️ by [Kaushal Kumar](https://github.com/r4hul-s3thi)**
+**Made with ❤️ by [Kaushal Kumar](https://github.com/Kaushalkumar012)**
 
 <br/>
 
